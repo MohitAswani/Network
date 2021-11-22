@@ -26,8 +26,8 @@ class Login : AppCompatActivity() {
         }
 
         binding.logInButton.setOnClickListener{
-            val email=binding.editEmail.text.toString()
-            val password=binding.editPassword.text.toString()
+            val email="test3@gmail.com"
+            val password="test1234"
 
             login(email,password)
         }
