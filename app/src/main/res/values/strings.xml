@@ -6,4 +6,5 @@
     <string name="sign_up">SIGN UP</string>
     <string name="name">NAME</string>
     <string name="log_out">LOG OUT</string>
+    <string name="username">USERNAME</string>
 </resources>
