@@ -9,9 +9,14 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:gravity="center"
+        android:background="#1E233E"
         tools:context=".Login">
-
-
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/netw"
+            android:layout_marginBottom="25dp"
+            />
         <com.google.android.material.textfield.TextInputLayout
             android:background="@color/white"
             android:id="@+id/textInputLayout1"
@@ -28,8 +33,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email"
-            tools:layout_editor_absoluteX="0dp"
-            tools:layout_editor_absoluteY="285dp" />
+            android:drawableLeft="@drawable/ic_email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -48,10 +52,10 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/edit_password"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:hint="@string/password"
-                tools:layout_editor_absoluteX="0dp"
-                tools:layout_editor_absoluteY="285dp" />
+                android:drawableStart="@drawable/ic_lock"
+                 />
 
         </com.google.android.material.textfield.TextInputLayout>
 
