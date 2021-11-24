@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.logOutButton.setOnClickListener{
             mAuth.signOut()
-            val intent= Intent(this@MainActivity,Login::class.java)
+            val intent= Intent(this@MainActivity,PhoneLogin::class.java)
             startActivity(intent)
         }
     }
