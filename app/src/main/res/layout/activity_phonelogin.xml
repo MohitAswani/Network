@@ -15,15 +15,17 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:src="@drawable/netw"
-            android:layout_marginBottom="100dp"
+            android:layout_margin="50dp"
             />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="16sp"
-            android:text="We will send you one time otp on this given phone number"
+            android:textSize="36sp"
+            android:text="Network"
             android:textColor="@color/white"
             android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="200dp"
             />
         <TextView
             android:layout_width="match_parent"
@@ -34,9 +36,18 @@
             android:gravity="center"
             />
 
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="We will send an OTP to your phone"
+            android:textSize="12sp"
+            android:textColor="@color/white"
+            android:gravity="center"
+            />
+
         <LinearLayout
-            android:layout_width="250dp"
-            android:layout_height="30dp"
+            android:layout_width="300dp"
+            android:layout_height="50dp"
             android:background="@drawable/box"
             android:gravity="center"
             android:layout_marginTop="20dp"
@@ -46,31 +57,30 @@
             android:orientation="horizontal">
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:text="+91"
                 android:layout_marginBottom="30dp"
                 android:layout_marginTop="30dp"
                 android:textColor="@color/white"
-                android:textSize="20sp"
                 android:gravity="center"
                 android:textStyle="bold"
+                android:textSize="24sp"
+                android:padding="4dp"
                 />
 
             <EditText
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
+                android:layout_width="250dp"
+                android:layout_height="48dp"
                 android:id="@+id/edit_number"
-                android:hint="9456783234"
+                android:hint="XXXXXXXXXX"
                 android:textColor="@color/white"
                 android:background="@null"
                 android:imeOptions="actionDone"
                 android:inputType="number"
                 android:textColorHint="@color/white"
-                android:textSize="16sp"
+                android:textSize="24sp"
                 android:textStyle="bold"
-
-
-
+                android:padding="4dp"
                 />
 
         </LinearLayout>

@@ -9,12 +9,10 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
+import com.example.network.MainActivity
 import com.example.network.R
 import com.google.firebase.FirebaseException
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.PhoneAuthCredential
-import com.google.firebase.auth.PhoneAuthOptions
-import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.auth.*
 import kotlinx.android.synthetic.main.activity_phonelogin.*
 import java.util.concurrent.TimeUnit
 
@@ -28,6 +26,9 @@ class phonelogin : AppCompatActivity() {
    lateinit var callbacks: PhoneAuthProvider.OnVerificationStateChangedCallbacks
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        supportActionBar?.hide()
+
         auth= FirebaseAuth.getInstance()
         setContentView(R.layout.activity_phonelogin)
        editnumber=findViewById(R.id.edit_number)
@@ -90,4 +91,5 @@ class phonelogin : AppCompatActivity() {
             .build()
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
+
 }

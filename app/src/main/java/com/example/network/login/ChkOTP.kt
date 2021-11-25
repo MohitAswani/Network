@@ -4,14 +4,13 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
-import android.widget.EditText
-import android.widget.TextView
-import android.widget.Toast
 import android.text.Editable
 
 import android.text.TextWatcher
 import android.util.Log
+import android.view.View
+import android.widget.*
+import androidx.core.view.isVisible
 import com.example.network.MainActivity
 import com.example.network.R
 import com.google.firebase.FirebaseException
@@ -29,6 +28,7 @@ class ChkOTP : AppCompatActivity() {
     lateinit var  input5:EditText
     lateinit var  input6:EditText
     lateinit var  verify:Button
+    lateinit var  PB:ProgressBar
     lateinit var Getotp:String
     lateinit var auth: FirebaseAuth
     lateinit var redo:TextView
@@ -37,6 +37,9 @@ class ChkOTP : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chk_otp)
+
+        supportActionBar?.hide()
+
         input1=findViewById(R.id.inputotp1)
         input3=findViewById(R.id.inputotp3)
         input4=findViewById(R.id.inputotp4)
@@ -44,6 +47,7 @@ class ChkOTP : AppCompatActivity() {
         input6=findViewById(R.id.inputotp6)
         input2=findViewById(R.id.inputotp2)
         verify=findViewById(R.id.OTP_button)
+        PB=findViewById(R.id.Prog_send_otp)
         auth=FirebaseAuth.getInstance()
         val mob:TextView =findViewById<TextView>(R.id.mobile).apply {
             text=intent.getStringExtra("number")
@@ -61,6 +65,8 @@ class ChkOTP : AppCompatActivity() {
                sb.append(input6.text.toString())
                val enteredotp:String=sb.toString()
 
+                  verify.visibility= View.GONE
+               PB.visibility=View.VISIBLE
                   Log.d("TAG","the enterd otp $enteredotp")
                   val credential : PhoneAuthCredential = PhoneAuthProvider.getCredential(
                       Getotp, enteredotp)
@@ -76,7 +82,6 @@ class ChkOTP : AppCompatActivity() {
        redo=findViewById(R.id.recieveOTP)
         redo.setOnClickListener {
             sendVerificationcode("+91"+mob.text.toString().trim())
-
         }
         callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             override fun onVerificationCompleted(credential: PhoneAuthCredential) {
@@ -218,9 +223,12 @@ class ChkOTP : AppCompatActivity() {
                     startActivity(intent)
                 } else {
                     // Sign in failed, display a message and update the UI
+
                     Log.w(TAG, "signInWithCredential:failure", task.exception)
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
                         // The verification code entered was invalid
+                        verify.visibility= View.VISIBLE
+                        PB.visibility=View.GONE
                         Toast.makeText(this,"Invalid OTP",Toast.LENGTH_SHORT).show()
                     }
                     // Update UI
