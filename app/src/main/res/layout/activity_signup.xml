@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="#1E233E"
-        tools:context=".Login">
+        tools:context=".emaillogin.Login">
         <com.google.android.material.textfield.TextInputLayout
             android:background="@color/white"
             android:id="@+id/textInputLayout2"

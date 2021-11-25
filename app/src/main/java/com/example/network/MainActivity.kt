@@ -4,8 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.network.databinding.ActivityMainBinding
+import com.example.network.login.phonelogin
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
         binding.logOutButton.setOnClickListener{
             mAuth.signOut()
-            val intent= Intent(this@MainActivity,Login::class.java)
+            val intent= Intent(this@MainActivity, phonelogin::class.java)
             startActivity(intent)
         }
     }

@@ -1,14 +1,12 @@
-package com.example.network
+package com.example.network.emaillogin
 
-import android.content.ContentValues.TAG
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
+import com.example.network.MainActivity
 import com.example.network.databinding.ActivitySignupBinding
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.ktx.Firebase
 
 class Signup : AppCompatActivity() {
 
@@ -40,7 +38,7 @@ class Signup : AppCompatActivity() {
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
-                    val intent=Intent(this@Signup,MainActivity::class.java)
+                    val intent=Intent(this@Signup, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this@Signup,"ERROR :(",Toast.LENGTH_SHORT).show()

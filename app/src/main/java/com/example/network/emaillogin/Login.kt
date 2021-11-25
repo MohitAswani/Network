@@ -1,9 +1,10 @@
-package com.example.network
+package com.example.network.emaillogin
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.example.network.MainActivity
 import com.example.network.databinding.ActivityLoginBinding
 import com.google.firebase.auth.FirebaseAuth
 
@@ -21,7 +22,7 @@ class Login : AppCompatActivity() {
         mAuth= FirebaseAuth.getInstance()
 
         binding.signupButton.setOnClickListener{
-            val intent= Intent(this,Signup::class.java)
+            val intent= Intent(this, Signup::class.java)
             startActivity(intent)
         }
 
@@ -37,7 +38,7 @@ class Login : AppCompatActivity() {
         super.onStart()
         if(mAuth.currentUser!=null)
         {
-            val intent=Intent(this@Login,MainActivity::class.java)
+            val intent=Intent(this@Login, MainActivity::class.java)
             startActivity(intent)
         }
     }
@@ -49,7 +50,7 @@ class Login : AppCompatActivity() {
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
                     // code after successful login
-                    val intent=Intent(this@Login,MainActivity::class.java)
+                    val intent=Intent(this@Login, MainActivity::class.java)
                     startActivity(intent)
                 } else {
                     Toast.makeText(this@Login,"USER DOES NOT EXIST",Toast.LENGTH_SHORT).show()

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.network">
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -9,22 +10,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Network"
         android:usesCleartextTraffic="true">
-
         <activity
-            android:name=".Signup"
+            android:name=".login.ChkOTP"
             android:exported="false" />
         <activity
-            android:name=".Login"
+            android:name=".emaillogin.Login"
+            android:exported="false" />
+        <activity
+            android:name=".emaillogin.Signup"
+            android:exported="false" />
+        <activity
+            android:name=".login.phonelogin"
             android:exported="true">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>
