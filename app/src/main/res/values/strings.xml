@@ -7,4 +7,6 @@
     <string name="name">NAME</string>
     <string name="log_out">LOG OUT</string>
     <string name="username">USERNAME</string>
+    <string name="symbol">Symbol</string>
+    <string name="phone_number">Phone Number</string>
 </resources>

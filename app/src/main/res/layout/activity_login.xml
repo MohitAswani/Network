@@ -10,7 +10,7 @@
         android:orientation="vertical"
         android:gravity="center"
         android:background="#1E233E"
-        tools:context=".emaillogin.Login">
+        tools:context=".Login">
         <ImageView
             android:layout_width="100dp"
             android:layout_height="100dp"
@@ -32,10 +32,8 @@
             android:id="@+id/edit_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:hint="@string/email"
-            android:drawableLeft="@drawable/ic_email"
-            />
+            android:drawableLeft="@drawable/ic_email" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
