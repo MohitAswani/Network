@@ -2,15 +2,16 @@ package com.example.network.splashscreen
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import androidx.appcompat.app.AppCompatActivity
 import com.example.network.MainActivity
 import com.example.network.R
-import com.example.network.login.phonelogin
+import com.example.network.phoneAuth.phonelogin
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import java.util.*
 
 @SuppressLint("CustomSplashScreen")
 class SplashScreen : AppCompatActivity()

@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.network">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,9 +11,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Network"
         android:usesCleartextTraffic="true">
+        <service
+            android:name=".firebase.MessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <activity
+            android:name=".signup.SignUp"
+            android:exported="false" />
         <activity
             android:name=".splashscreen.SplashScreen"
-            android:exported="true" >
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".login.ChkOTP"
+            android:name=".phoneAuth.ChkOTP"
             android:exported="false" />
         <activity
             android:name=".emaillogin.Login"
@@ -29,11 +40,11 @@
             android:name=".emaillogin.Signup"
             android:exported="false" />
         <activity
-            android:name=".login.phonelogin"
+            android:name=".phoneAuth.phonelogin"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"/>
+            android:exported="false" />
     </application>
 
 </manifest>

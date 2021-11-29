@@ -18,4 +18,15 @@
 
     <string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="create_new_account">Create new account</string>
+    <string name="profile_picture">profile_picture</string>
+    <string name="add_image">Add Image</string>
+    <string name="sign_in">Sign in</string>
+    <string name="checkmark">checkMark</string>
+    <string name="otp_text_1">Please enter the 6-digit OTP send to</string>
+    <string name="enter_otp">Enter OTP</string>
+    <string name="verify">Verify</string>
+    <string name="resend_otp">Resend OTP</string>
+    <string name="did_not_otp">Didnot recieve the OTP?</string>
+    <string name="enter_name">Enter name</string>
 </resources>

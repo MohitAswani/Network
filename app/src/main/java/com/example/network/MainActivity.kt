@@ -6,9 +6,8 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.example.network.databinding.ActivityMainBinding
-import com.example.network.login.phonelogin
+import com.example.network.phoneAuth.phonelogin
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 
 class MainActivity : AppCompatActivity() {
 

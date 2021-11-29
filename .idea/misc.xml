@@ -4,13 +4,18 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/box.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/circle.xml" value="0.15925925925925927" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_baseline_message.xml" value="0.1484375" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/rectangle.xml" value="0.15925925925925927" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/rectangle_2.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/splash_screen.xml" value="0.15709090364314326" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_chk_otp.xml" value="0.12613521695257315" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_login.xml" value="0.2879999900124293" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_main.xml" value="0.12613521695257315" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_new_user.xml" value="0.1745454484923814" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_phone_login.xml" value="0.21818181061547676" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_phonelogin.xml" value="0.2604166666666667" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_sign_up_phone.xml" value="0.21818181061547676" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_signup.xml" value="0.12613521695257315" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_splash_screen.xml" value="0.11979166666666667" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/menu/main_activity_menu.xml" value="0.2553626149131767" />
