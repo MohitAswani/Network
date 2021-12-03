@@ -1,4 +1,4 @@
-package com.example.network.login
+package com.example.network.phoneAuth
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -9,7 +9,6 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
-import com.example.network.MainActivity
 import com.example.network.R
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.*
