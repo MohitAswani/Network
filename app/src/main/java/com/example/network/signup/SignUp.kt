@@ -7,6 +7,7 @@ import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -63,6 +64,7 @@ class SignUp : AppCompatActivity() {
     private fun signUp(){
         loading(true)
         val database=FirebaseFirestore.getInstance()
+        Log.d("SIGNED",preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN).toString())
         val user=HashMap<String,Any>()
         user[Constants.KEY_NAME]= binding.editName.text.toString().trim()
         user[Constants.KEY_PHONE]=phoneNumber.toString()
