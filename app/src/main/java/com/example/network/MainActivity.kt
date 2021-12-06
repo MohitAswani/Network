@@ -1,26 +1,24 @@
 package com.example.network
 
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Base64
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.network.adapters.ViewPagerFragmentAdapter
 import com.example.network.databinding.ActivityMainBinding
 import com.example.network.phoneAuth.phonelogin
 import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
-import java.util.*
-import android.widget.Toast
-import android.R.menu
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
-import java.lang.reflect.Field
+import java.util.*
 import kotlin.collections.HashMap
 
 
@@ -32,6 +30,10 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var preferenceManager: PreferenceManager
 
+    private lateinit var viewPagerFragmentAdapter: ViewPagerFragmentAdapter
+
+    private val titles= arrayOf(R.string.tab_chat,R.string.tab_status)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         preferenceManager = PreferenceManager(applicationContext)
         loadDetails()
         getToken()
+        setListeners()
         binding.menuImage.setOnClickListener { // Initializing the popup menu and giving the reference as current context
             val popupMenu = PopupMenu(this@MainActivity, binding.menuImage)
 
@@ -50,8 +53,6 @@ class MainActivity : AppCompatActivity() {
                 when (menuItem.itemId) {
                     R.id.log_out_option -> {
                         signOut()
-                        val intent = Intent(this@MainActivity, phonelogin::class.java)
-                        startActivity(intent)
                         true
                     }
                     else -> true
@@ -59,21 +60,22 @@ class MainActivity : AppCompatActivity() {
             }
             // Showing the popup menu
             popupMenu.show()
+
         }
+
+        viewPagerFragmentAdapter= ViewPagerFragmentAdapter(this)
+        binding.viewPager.adapter=viewPagerFragmentAdapter
+        TabLayoutMediator(binding.tabs,binding.viewPager) { tab: TabLayout.Tab, i: Int ->
+            tab.setText(
+                titles[i]
+            )
+        }.attach()
+
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.main_activity_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.log_out_option -> {
-                signOut()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+    private fun setListeners(){
+        binding.fabNewChat.setOnClickListener{
+            startActivity(Intent(this@MainActivity,UserActivity::class.java))
         }
     }
 
@@ -100,7 +102,6 @@ class MainActivity : AppCompatActivity() {
 
         documentReference.update(Constants.FCM_TOKEN, token)
             .addOnSuccessListener {
-                showToast("Token updated successfully")
             }
             .addOnFailureListener {
                 showToast("Token not updated")

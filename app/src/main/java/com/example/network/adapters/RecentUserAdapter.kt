@@ -1,0 +1,49 @@
+package com.example.network.adapters
+
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.recyclerview.widget.RecyclerView
+import com.example.network.databinding.ItemContainerUserBinding
+import com.example.network.listeners.UserListener
+import com.example.network.models.Users
+
+class RecentUserAdapter(val friends: List<Users>, val userListener: UserListener):RecyclerView.Adapter<RecentUserAdapter.UserViewHolder>(){
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): UserViewHolder {
+
+        val itemContainerUserBinding=com.example.network.databinding.ItemContainerUserBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
+        )
+        return UserViewHolder(itemContainerUserBinding)
+    }
+
+    override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
+        holder.setUserData(friends[position])
+    }
+
+    override fun getItemCount(): Int {
+        return friends.size
+    }
+
+    inner class UserViewHolder(val binding: ItemContainerUserBinding) : RecyclerView.ViewHolder(binding.root)
+    {
+        fun setUserData(user: Users){
+            binding.textName.text = user.name
+            binding.imageProfile.setImageBitmap(getUserImage(user.image))
+            binding.root.setOnClickListener{
+                userListener.onUserClicked(user)
+            }
+        }
+    }
+
+    private fun getUserImage(encodedImage:String) :Bitmap
+    {
+        val bytes = Base64.decode(encodedImage, Base64.DEFAULT)
+        return  BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+}

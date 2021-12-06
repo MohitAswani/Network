@@ -77,7 +77,7 @@ class SignUp : AppCompatActivity() {
                 preferenceManager.putString(Constants.KEY_USER_ID,it.id)
                 preferenceManager.putString(Constants.KEY_NAME,binding.editName.text.toString().trim())
                 preferenceManager.putString(Constants.KEY_IMAGE,encodedImage!!)
-                val intent=Intent(applicationContext,MainActivity::class.java)
+                val intent=Intent(applicationContext, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK))
                 startActivity(intent)
             }
