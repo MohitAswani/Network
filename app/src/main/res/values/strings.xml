@@ -29,4 +29,10 @@
     <string name="resend_otp">Resend OTP</string>
     <string name="did_not_otp">Didnot recieve the OTP?</string>
     <string name="enter_name">Enter name</string>
+    <string name="title_activity_front">FrontActivity</string>
+    <string name="tab_chat">CHATS</string>
+    <string name="tab_status">STATUS</string>
+    <string name="add_user">ADD USER</string>
+    <string name="no_user_error">NO USER AVAILABLE</string>
+    <string name="message">Message</string>
 </resources>

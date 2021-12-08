@@ -14,7 +14,6 @@ import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
-import java.lang.reflect.Constructor
 import java.util.*
 
 @SuppressLint("CustomSplashScreen")
