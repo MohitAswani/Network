@@ -3,14 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="@dimen/_4sdp"
-    android:layout_marginTop="@dimen/_10sdp"
+    android:padding="@dimen/_8sdp"
+    android:layout_marginTop="@dimen/_5sdp"
     >
 
     <com.makeramen.roundedimageview.RoundedImageView
         android:id="@+id/imageProfile"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_40sdp"
+        android:layout_width="@dimen/_45sdp"
+        android:layout_height="@dimen/_45sdp"
         android:background="@drawable/profile_pic_icon"
         android:scaleType="centerCrop"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,15 +31,14 @@
         android:id="@+id/textName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_10sdp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="@dimen/_14ssp"
         android:textColor="@color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@id/viewSupporter"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/recentTime"
         app:layout_constraintStart_toEndOf="@id/viewSupporter"
         />
     <TextView
@@ -50,11 +49,26 @@
         android:layout_marginEnd="@dimen/_10sdp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="@dimen/_8ssp"
-        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/light_grey"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/viewSupporter"
+        />
+
+    <TextView
+        android:id="@+id/recentTime"
+        android:layout_width="@dimen/_40sdp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:textSize="@dimen/_8ssp"
+        android:textColor="@color/light_grey"
+        app:layout_constraintTop_toTopOf="@id/textName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/textName"
+        app:layout_constraintBaseline_toBaselineOf="@id/textName"
         />
 
 

@@ -13,10 +13,12 @@
         android:theme="@style/Theme.Network"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".BasicActivity"
+            android:exported="false" />
+        <activity
             android:name=".ChatActivity"
             android:exported="false"
-            android:windowSoftInputMode="adjustResize"
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".UserActivity"
             android:exported="false" />
@@ -37,6 +39,7 @@
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -56,4 +59,5 @@
             android:name=".MainActivity"
             android:exported="false" />
     </application>
+
 </manifest>

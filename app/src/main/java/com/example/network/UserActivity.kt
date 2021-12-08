@@ -3,7 +3,6 @@ package com.example.network
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import com.example.network.adapters.UsersAdapter
 import com.example.network.databinding.ActivityUserBinding
 import com.example.network.listeners.UserListener
@@ -12,7 +11,7 @@ import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
 import com.google.firebase.firestore.FirebaseFirestore
 
-class UserActivity : AppCompatActivity(),UserListener{
+class UserActivity : BasicActivity(),UserListener{
 
     private lateinit var binding:ActivityUserBinding
 
@@ -48,9 +47,10 @@ class UserActivity : AppCompatActivity(),UserListener{
                         if(currentUserId == document.id)
                             continue
 
+                        val phoneno: String =document.getString(Constants.KEY_PHONE)?:"xxxxxxxxxx"
                         val user=Users(
                             name=document.getString(Constants.KEY_NAME)?:"name",
-                            phoneNumber="+91"+(document.getString(Constants.KEY_PHONE)?:"xxxxxxxxxx"),
+                            phoneNumber="+91"+" "+phoneno.substring(0,5)+" "+phoneno.substring(5),
                             image =document.getString(Constants.KEY_IMAGE)?:"image",
                             token =document.getString(Constants.FCM_TOKEN)?:"token",
                             id = document.id

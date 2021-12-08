@@ -12,15 +12,22 @@ class Constants {
         const val FCM_TOKEN="fcmtoken"
         const val KEY_USER="user"
 
-        const val KEY_SUB_COLLECTION_FRIENDS="friends"
-        const val KEY_FRIEND_ID="friendId"
-        const val KEY_FRIEND_RECENT_MESSAGE="recentMessage"
-
-        const val KEY_SUB_COLLECTION_CHATS="chats"
+        const val KEY_COLLECTION_CHATS="chats"
 
         const val KEY_SENDER_ID="senderId"
         const val KEY_RECEIVER_ID="receiverId"
         const val KEY_MESSAGE = "message"
         const val KEY_TIMESTAMP= "timestamp"
+
+        const val KEY_COLLECTION_CONVERSATION="conversation"
+        const val KEY_SENDER_NAME="senderName"
+        const val KEY_SENDER_IMAGE="senderImage"
+        const val KEY_RECEIVER_NAME="receiverName"
+        const val KEY_RECEIVER_IMAGE="receiverImage"
+        const val KEY_RECENT_MESSAGE="recentMessage"
+
+        const val KEY_IS_ONLINE="online"
+        const val LAST_SEEN="lastseen"
+
     }
 }

@@ -1,22 +1,29 @@
 package com.example.network.recent
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.network.ChatActivity
 import com.example.network.R
-import com.example.network.adapters.RecentUserAdapter
+import com.example.network.adapters.RecentConversationAdapter
 import com.example.network.databinding.RecentFragmentBinding
-import com.example.network.listeners.UserListener
+import com.example.network.listeners.ConversationListener
+import com.example.network.models.Conversation
 import com.example.network.models.Users
+import com.example.network.phoneAuth.ChkOTP
 import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FirebaseFirestore
+import java.util.*
 
-class Recent : Fragment(),UserListener{
+class Recent : Fragment(), ConversationListener {
 
 
     private lateinit var viewModel: RecentViewModel
@@ -25,55 +32,177 @@ class Recent : Fragment(),UserListener{
 
     private lateinit var preferenceManager: PreferenceManager
 
+    private lateinit var recentMessages: ArrayList<Conversation>
+
+    private lateinit var recentConversationAdapter: RecentConversationAdapter
+
+    private lateinit var database: FirebaseFirestore
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.recent_fragment, container, false)
-
-        preferenceManager = context?.let { PreferenceManager(it.applicationContext) }!!
-
-        getUsers()
-
+        init()
+        listenConversations()
         return binding.root
     }
 
-    private fun getUsers() {
-        loading(true)
+    private fun init() {
+        preferenceManager = context?.let { PreferenceManager(it.applicationContext) }!!
+        recentMessages = ArrayList()
+        recentConversationAdapter = RecentConversationAdapter(
+            recentMessages,
+            preferenceManager.getString(Constants.KEY_USER_ID),
+            this
+        )
+        binding.recentRecyclerView.adapter = recentConversationAdapter
+        database = FirebaseFirestore.getInstance()
+    }
 
-        val database = FirebaseFirestore.getInstance()
-        database.collection(Constants.KEY_COLLECTIONS_USER+"/"+preferenceManager.getString(Constants.KEY_USER_ID)+"/"+Constants.KEY_SUB_COLLECTION_FRIENDS)
-            .get()
-            .addOnCompleteListener{
-                if(it.isSuccessful&&it.result!=null)
-                {
-                    loading(false)
-                    val friends=ArrayList<Users>()
-                    for(document in it.result!!.documents)
-                    {
-                        val friend=Users(
-                            name=document.getString(Constants.KEY_NAME)?:"name",
-                            phoneNumber=null,
-                            image =document.getString(Constants.KEY_IMAGE)?:"image",
-                            token =document.getString(Constants.FCM_TOKEN)?:"token",
-                            id = document.id
-                        )
-                        friends.add(friend)
-                    }
-                    if(friends.size>0)
-                    {
-                        val adapter=RecentUserAdapter(friends,this)
-                        binding.userRecyclerView.adapter=adapter
-                        binding.userRecyclerView.visibility=View.VISIBLE
-                    }
-                    else{
-                        showErrorMessage()
-                    }
+    @SuppressLint("NotifyDataSetChanged")
+    private fun listenConversations() {
+        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+            .whereEqualTo(
+                Constants.KEY_SENDER_ID,
+                preferenceManager.getString(Constants.KEY_USER_ID)
+            )
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w(ChkOTP.TAG, "Listen:error", e)
+                    return@addSnapshotListener
                 }
-                else
-                {
-                    showErrorMessage()
+                if (snapshots != null) {
+                    for (dc in snapshots.documentChanges) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            val senderId = dc.document.getString(Constants.KEY_SENDER_ID)!!
+                            val receiverId = dc.document.getString(Constants.KEY_RECEIVER_ID)!!
+                            val conversationImage: String
+                            val conversationName: String
+                            val conversationId: String
+                            if (preferenceManager.getString(Constants.KEY_USER_ID) == senderId) {
+                                conversationId =
+                                    dc.document.getString(Constants.KEY_RECEIVER_ID)!!
+                                conversationImage =
+                                    dc.document.getString(Constants.KEY_RECEIVER_IMAGE)!!
+                                conversationName =
+                                    dc.document.getString(Constants.KEY_RECEIVER_NAME)!!
+                            } else {
+                                conversationId =
+                                    dc.document.getString(Constants.KEY_SENDER_ID)!!
+                                conversationImage =
+                                    dc.document.getString(Constants.KEY_SENDER_IMAGE)!!
+                                conversationName =
+                                    dc.document.getString(Constants.KEY_SENDER_NAME)!!
+                            }
+                            val conversationMessage: String=dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                            val dateObject: Date =
+                                dc.document.getDate(Constants.KEY_TIMESTAMP)!!
+                            val conversation = Conversation(
+                                senderId = senderId,
+                                receiverId = receiverId,
+                                conversationId = conversationId,
+                                conversationImage = conversationImage,
+                                conversationName = conversationName,
+                                last_message = conversationMessage,
+                                dateObject = dateObject
+                            )
+                            recentMessages.add(conversation)
+                        } else if (dc.type == DocumentChange.Type.MODIFIED) {
+                            for (i in 0..recentMessages.size) {
+                                val senderId = dc.document.getString(Constants.KEY_SENDER_ID)
+                                val receiverId =
+                                    dc.document.getString(Constants.KEY_RECEIVER_ID)
+                                if (recentMessages[i].senderId == senderId && recentMessages[i].receiverId == receiverId) {
+                                        recentMessages[i].last_message =
+                                                dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                                    recentMessages[i].dateObject =
+                                        dc.document.getDate(Constants.KEY_TIMESTAMP)!!
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+                    recentMessages.sortByDescending { it.dateObject }
+                    recentConversationAdapter.notifyDataSetChanged()
+                    binding.recentRecyclerView.smoothScrollToPosition(0)
+                    binding.recentRecyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
                 }
+                binding.progressBar.visibility = View.GONE
+            }
+
+
+        database.collection(Constants.KEY_COLLECTION_CONVERSATION)
+            .whereEqualTo(
+                Constants.KEY_RECEIVER_ID,
+                preferenceManager.getString(Constants.KEY_USER_ID)
+            )
+            .addSnapshotListener { snapshots, e ->
+                if (e != null) {
+                    Log.w(ChkOTP.TAG, "Listen:error", e)
+                    return@addSnapshotListener
+                }
+                if (snapshots != null) {
+                    for (dc in snapshots.documentChanges) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            val senderId = dc.document.getString(Constants.KEY_SENDER_ID)!!
+                            val receiverId = dc.document.getString(Constants.KEY_RECEIVER_ID)!!
+                            val conversationImage: String
+                            val conversationName: String
+                            val conversationId: String
+                            if (preferenceManager.getString(Constants.KEY_USER_ID) == senderId) {
+                                conversationId =
+                                    dc.document.getString(Constants.KEY_RECEIVER_ID)!!
+                                conversationImage =
+                                    dc.document.getString(Constants.KEY_RECEIVER_IMAGE)!!
+                                conversationName =
+                                    dc.document.getString(Constants.KEY_RECEIVER_NAME)!!
+                            } else {
+                                conversationId =
+                                    dc.document.getString(Constants.KEY_SENDER_ID)!!
+                                conversationImage =
+                                    dc.document.getString(Constants.KEY_SENDER_IMAGE)!!
+                                conversationName =
+                                    dc.document.getString(Constants.KEY_SENDER_NAME)!!
+                            }
+                            val conversationMessage: String =
+                                dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                            val dateObject: Date =
+                                dc.document.getDate(Constants.KEY_TIMESTAMP)!!
+                            val conversation = Conversation(
+                                senderId = senderId,
+                                receiverId = receiverId,
+                                conversationId = conversationId,
+                                conversationImage = conversationImage,
+                                conversationName = conversationName,
+                                last_message = conversationMessage,
+                                dateObject = dateObject
+                            )
+                            recentMessages.add(conversation)
+                        } else if (dc.type == DocumentChange.Type.MODIFIED) {
+                            for (i in 0..recentMessages.size) {
+                                val senderId = dc.document.getString(Constants.KEY_SENDER_ID)
+                                val receiverId = dc.document.getString(Constants.KEY_RECEIVER_ID)
+                                val conversationName: String
+                                if (recentMessages[i].senderId == senderId && recentMessages[i].receiverId == receiverId) {
+                                    recentMessages[i].last_message =
+                                        dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                                    recentMessages[i].dateObject =
+                                        dc.document.getDate(Constants.KEY_TIMESTAMP)!!
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    recentMessages.sortByDescending { it.dateObject }
+                    recentConversationAdapter.notifyDataSetChanged()
+                    binding.recentRecyclerView.smoothScrollToPosition(0)
+                    binding.recentRecyclerView.visibility = View.VISIBLE
+                    binding.progressBar.visibility = View.GONE
+                }
+                binding.progressBar.visibility = View.GONE
             }
     }
 
@@ -89,7 +218,11 @@ class Recent : Fragment(),UserListener{
         }
     }
 
-    override fun onUserClicked(user: Users) {
-
+    override fun onConversationClicked(user: Users) {
+        val intent = Intent(context?.applicationContext, ChatActivity::class.java)
+        intent.putExtra(Constants.KEY_USER, user)
+        startActivity(intent)
     }
+
+
 }

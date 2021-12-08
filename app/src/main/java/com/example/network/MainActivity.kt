@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Base64
 import android.widget.PopupMenu
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import com.example.network.adapters.ViewPagerFragmentAdapter
 import com.example.network.databinding.ActivityMainBinding
 import com.example.network.phoneAuth.phonelogin
@@ -22,7 +21,7 @@ import java.util.*
 import kotlin.collections.HashMap
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BasicActivity() {
 
     private lateinit var binding: ActivityMainBinding
 
