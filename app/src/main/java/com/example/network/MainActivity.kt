@@ -94,6 +94,7 @@ class MainActivity : BasicActivity() {
     }
 
     private fun updateToken(token: String) {
+        preferenceManager.putString(Constants.FCM_TOKEN,token)
         val database = FirebaseFirestore.getInstance()
 
         val documentReference = database.collection(Constants.KEY_COLLECTIONS_USER)

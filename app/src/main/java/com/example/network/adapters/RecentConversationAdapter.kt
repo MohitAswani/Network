@@ -10,7 +10,6 @@ import com.example.network.databinding.ItemContainerRecentBinding
 import com.example.network.listeners.ConversationListener
 import com.example.network.models.Conversation
 import com.example.network.models.Users
-import com.example.network.utilities.PreferenceManager
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -44,11 +43,12 @@ class RecentConversationAdapter(private val recentConversations: List<Conversati
             binding.recentTime.text=getReadableDate(recentConversation.dateObject)
             binding.root.setOnClickListener{
                 val user=Users(
-                    name=recentConversation.conversationName,
-                    id=recentConversation.conversationId,
+                    name =recentConversation.conversationName,
+                    id =recentConversation.conversationId,
                     image = recentConversation.conversationImage,
                     phoneNumber = null,
-                    token = null
+                    token = null,
+                    status = ""
                 )
                 conversationListener.onConversationClicked(user)
             }
@@ -65,6 +65,6 @@ class RecentConversationAdapter(private val recentConversations: List<Conversati
         return if(date.date==Date().date)
             SimpleDateFormat("hh:mm a", Locale.getDefault()).format(date)
         else
-            SimpleDateFormat("dd:mm:yyyy", Locale.getDefault()).format(date)
+            SimpleDateFormat("dd/MM/yy", Locale.getDefault()).format(date)
     }
 }

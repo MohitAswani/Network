@@ -23,61 +23,66 @@ import java.io.FileNotFoundException
 class SignUp : AppCompatActivity() {
 
 
-    private lateinit var binding:ActivitySignUpPhoneBinding
+    private lateinit var binding: ActivitySignUpPhoneBinding
 
-    private var encodedImage:String?=null
+    private var encodedImage: String? = null
 
-    private var phoneNumber:String?=null
+    private var phoneNumber: String? = null
 
     private lateinit var preferenceManager: PreferenceManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivitySignUpPhoneBinding.inflate(layoutInflater)
+        binding = ActivitySignUpPhoneBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        preferenceManager= PreferenceManager(applicationContext)
-        phoneNumber=intent.getStringExtra("number")
+        preferenceManager = PreferenceManager(applicationContext)
+        phoneNumber = intent.getStringExtra("number")
         setListeners()
         supportActionBar?.hide()
     }
 
-    private fun setListeners()
-    {
-        binding.signUpButton.setOnClickListener{
-            if(isValidSignUp())
-            {
+    private fun setListeners() {
+        binding.signUpButton.setOnClickListener {
+            if (isValidSignUp()) {
                 signUp()
             }
         }
-        binding.imageLayout.setOnClickListener{
-            val intent=Intent(Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        binding.imageLayout.setOnClickListener {
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             pickImage.launch(intent)
         }
     }
 
-    private fun showToast(message:String)
-    {
-        Toast.makeText(this@SignUp,message, Toast.LENGTH_SHORT).show()
+    private fun showToast(message: String) {
+        Toast.makeText(this@SignUp, message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun signUp(){
+    private fun signUp() {
         loading(true)
-        val database=FirebaseFirestore.getInstance()
-        Log.d("SIGNED",preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN).toString())
-        val user=HashMap<String,Any>()
-        user[Constants.KEY_NAME]= binding.editName.text.toString().trim()
-        user[Constants.KEY_PHONE]=phoneNumber.toString()
-        user[Constants.KEY_IMAGE]=encodedImage.toString()
+        val database = FirebaseFirestore.getInstance()
+        Log.d("SIGNED", preferenceManager.getBoolean(Constants.KEY_IS_SIGNED_IN).toString())
+        val user = HashMap<String, Any>()
+        user[Constants.KEY_NAME] = binding.editName.text.toString().trim()
+        user[Constants.KEY_PHONE] = phoneNumber.toString()
+        user[Constants.KEY_IMAGE] = encodedImage.toString()
+        user[Constants.KEY_STATUS] = binding.editStatus.text.toString()
         database.collection(Constants.KEY_COLLECTIONS_USER)
             .add(user)
             .addOnSuccessListener {
                 loading(false)
-                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN,true)
-                preferenceManager.putString(Constants.KEY_USER_ID,it.id)
-                preferenceManager.putString(Constants.KEY_NAME,binding.editName.text.toString().trim())
-                preferenceManager.putString(Constants.KEY_IMAGE,encodedImage!!)
-                val intent=Intent(applicationContext, MainActivity::class.java)
+                preferenceManager.putBoolean(Constants.KEY_IS_SIGNED_IN, true)
+                preferenceManager.putString(Constants.KEY_USER_ID, it.id)
+                preferenceManager.putString(
+                    Constants.KEY_NAME,
+                    binding.editName.text.toString().trim()
+                )
+                preferenceManager.putString(Constants.KEY_IMAGE, encodedImage!!)
+                preferenceManager.putString(
+                    Constants.KEY_STATUS,
+                    binding.editStatus.text.toString()
+                )
+                val intent = Intent(applicationContext, MainActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK.or(Intent.FLAG_ACTIVITY_CLEAR_TASK))
                 startActivity(intent)
             }
@@ -88,36 +93,35 @@ class SignUp : AppCompatActivity() {
 
     }
 
-    private fun encodeImage(bitmap: Bitmap):String{
-        val pWidth=150;
-        val pHeight=bitmap.height*pWidth/bitmap.width
-        val previewBitmap:Bitmap= Bitmap.createScaledBitmap(bitmap,pWidth,pHeight,false)
-        val byteArrayOutputStream=ByteArrayOutputStream()
-        previewBitmap.compress(Bitmap.CompressFormat.JPEG,50,byteArrayOutputStream)
-        val bytes=byteArrayOutputStream.toByteArray()
-        return Base64.encodeToString(bytes,Base64.DEFAULT)
+    private fun encodeImage(bitmap: Bitmap): String {
+        val pWidth = 150;
+        val pHeight = bitmap.height * pWidth / bitmap.width
+        val previewBitmap: Bitmap = Bitmap.createScaledBitmap(bitmap, pWidth, pHeight, false)
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        previewBitmap.compress(Bitmap.CompressFormat.JPEG, 50, byteArrayOutputStream)
+        val bytes = byteArrayOutputStream.toByteArray()
+        return Base64.encodeToString(bytes, Base64.DEFAULT)
     }
 
-    private val pickImage=registerForActivityResult(ActivityResultContracts.StartActivityForResult()){ result->
-        if(result.resultCode== RESULT_OK)
-        {
-            val imageUri: Uri = result.data?.data!!
-            try{
-                val inputStream=contentResolver.openInputStream(imageUri)
-                val bitmap:Bitmap=BitmapFactory.decodeStream(inputStream)
-                binding.userImage.setImageBitmap(bitmap)
-                binding.addImageText.visibility=View.GONE
-                encodedImage=encodeImage(bitmap)
-            }
-            catch (e:FileNotFoundException){
-                e.printStackTrace()
+    private val pickImage =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val imageUri: Uri = result.data?.data!!
+                try {
+                    val inputStream = contentResolver.openInputStream(imageUri)
+                    val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
+                    binding.userImage.setImageBitmap(bitmap)
+                    binding.addImageText.visibility = View.GONE
+                    encodedImage = encodeImage(bitmap)
+                } catch (e: FileNotFoundException) {
+                    e.printStackTrace()
+                }
             }
         }
-    }
 
-    private fun isValidSignUp():Boolean{
+    private fun isValidSignUp(): Boolean {
         return when {
-            encodedImage==null -> {
+            encodedImage == null -> {
                 showToast("Add the image")
                 false
             }
@@ -131,16 +135,15 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    private fun loading(isLoading:Boolean)
-    {
-        when(isLoading){
-            true->{
-                binding.progSignUp.visibility= View.VISIBLE
-                binding.signUpButton.visibility=View.GONE
+    private fun loading(isLoading: Boolean) {
+        when (isLoading) {
+            true -> {
+                binding.progSignUp.visibility = View.VISIBLE
+                binding.signUpButton.visibility = View.GONE
             }
-            else->{
-                binding.progSignUp.visibility= View.GONE
-                binding.signUpButton.visibility=View.VISIBLE
+            else -> {
+                binding.progSignUp.visibility = View.GONE
+                binding.signUpButton.visibility = View.VISIBLE
             }
         }
     }

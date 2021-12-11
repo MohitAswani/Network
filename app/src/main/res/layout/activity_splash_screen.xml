@@ -12,12 +12,14 @@
         android:background="#1E233E"
         tools:context=".emaillogin.Login">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/network_symbol"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:src="@drawable/netw"
-            android:layout_margin="50dp"
+            android:layout_margin="100dp"
             />
         <TextView
+            android:id="@+id/network_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="36sp"

@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_4sdp"
     android:layout_marginTop="@dimen/_10sdp"
+    android:background="?selectableItemBackground"
     >
 
     <com.makeramen.roundedimageview.RoundedImageView
@@ -31,8 +32,8 @@
         android:id="@+id/textName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
         android:ellipsize="end"
         android:maxLines="1"
         android:textSize="@dimen/_14ssp"
@@ -43,15 +44,15 @@
         app:layout_constraintStart_toEndOf="@id/viewSupporter"
         />
     <TextView
-        android:id="@+id/textPhone"
+        android:id="@+id/textStatus"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_10sdp"
         android:layout_marginEnd="@dimen/_10sdp"
         android:ellipsize="end"
         android:maxLines="1"
-        android:textSize="@dimen/_12ssp"
-        android:textColor="@color/black"
+        android:textSize="@dimen/_10ssp"
+        android:textColor="@color/light_grey"
         app:layout_constraintTop_toBottomOf="@id/viewSupporter"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/viewSupporter"

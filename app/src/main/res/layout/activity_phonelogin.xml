@@ -12,8 +12,8 @@
         android:background="@color/backgroud_color"
         tools:context=".emaillogin.Login">
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
             android:src="@drawable/netw"
             android:layout_margin="50dp"
             />
@@ -25,7 +25,7 @@
             android:textColor="@color/white"
             android:gravity="center"
             android:textStyle="bold"
-            android:layout_marginBottom="200dp"
+            android:layout_marginBottom="100dp"
             />
         <TextView
             android:layout_width="match_parent"

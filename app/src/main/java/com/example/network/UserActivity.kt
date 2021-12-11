@@ -49,11 +49,12 @@ class UserActivity : BasicActivity(),UserListener{
 
                         val phoneno: String =document.getString(Constants.KEY_PHONE)?:"xxxxxxxxxx"
                         val user=Users(
-                            name=document.getString(Constants.KEY_NAME)?:"name",
-                            phoneNumber="+91"+" "+phoneno.substring(0,5)+" "+phoneno.substring(5),
+                            name =document.getString(Constants.KEY_NAME)?:"name",
+                            phoneNumber ="+91"+" "+phoneno.substring(0,5)+" "+phoneno.substring(5),
                             image =document.getString(Constants.KEY_IMAGE)?:"image",
                             token =document.getString(Constants.FCM_TOKEN)?:"token",
-                            id = document.id
+                            id = document.id,
+                            status =document.getString(Constants.KEY_STATUS)?:""
                         )
                         users.add(user)
                     }

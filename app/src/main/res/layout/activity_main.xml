@@ -7,7 +7,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:animateLayoutChanges="true"
-        android:background="@color/backgroud_color"
         tools:context=".MainActivity">
 
         <LinearLayout
@@ -18,6 +17,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/backgroud_color"
             >
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -40,12 +40,14 @@
                     android:layout_width="@dimen/_30sdp"
                     android:layout_height="@dimen/_30sdp"
                     android:layout_margin="@dimen/_8sdp"
-                    android:background="@drawable/ic_baseline_menu"
+                    android:background="@drawable/options"
                     android:scaleType="centerCrop"
                     app:layout_constraintBottom_toBottomOf="@id/user_image"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/user_image"
-                    app:riv_corner_radius="@dimen/_8sdp" />
+                    app:riv_corner_radius="@dimen/_8sdp"
+                    android:backgroundTint="@color/white"
+                    />
 
                 <TextView
                     android:id="@+id/user_name"
@@ -91,7 +93,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
-            tools:background="@color/white" />
+            />
 
         <FrameLayout
             android:layout_width="match_parent"
@@ -100,7 +102,6 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@id/app_bar"
-
             />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -114,7 +115,7 @@
             android:contentDescription="@string/add_user"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_round_add"
+            app:srcCompat="@drawable/new_chat"
             app:tint="@color/white" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

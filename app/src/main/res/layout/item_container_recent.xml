@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:padding="@dimen/_8sdp"
     android:layout_marginTop="@dimen/_5sdp"
+    android:background="?selectableItemBackground"
     >
 
     <com.makeramen.roundedimageview.RoundedImageView

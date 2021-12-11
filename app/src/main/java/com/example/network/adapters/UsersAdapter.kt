@@ -34,8 +34,8 @@ class UsersAdapter(val users: List<Users>,val userListener: UserListener):Recycl
     {
         fun setUserData(user: Users){
             binding.textName.text = user.name
-            binding.textPhone.text=user.phoneNumber
-            binding.imageProfile.setImageBitmap(getUserImage(user.image))
+            binding.textStatus.text=user.status
+            binding.imageProfile.setImageBitmap(user.image?.let { getUserImage(it) })
             binding.root.setOnClickListener{
                 userListener.onUserClicked(user)
             }

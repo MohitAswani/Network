@@ -5,7 +5,9 @@ import java.util.*
 data class ChatMessage(
     val senderId:String,
     val receiverId:String,
-    val message:String,
+    var message:String?,
     val dateTime:String,
     val dateObject:Date,
+    val file:String?,
+    val fileType:String
 )

@@ -12,40 +12,36 @@
         android:padding="16dp"
         tools:context=".signup.SignUp">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="@dimen/_50sdp"
-            android:layout_marginBottom="@dimen/_40sdp"
-            android:contentDescription="@string/symbol"
-            android:src="@drawable/netw" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_20sdp"
-            android:gravity="center"
-            android:text="@string/create_new_account"
+            android:textSize="80sp"
+            android:text="Sign up"
             android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:gravity="center"
+            android:textStyle="bold"
+            android:layout_marginBottom="@dimen/_60sdp"
+            />
 
         <FrameLayout
             android:id="@+id/image_layout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:layout_marginBottom="@dimen/_10sdp">
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@drawable/rectangle_2"
+            android:layout_gravity="center"
+            >
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/user_image"
-                android:layout_width="@dimen/_100sdp"
-                android:layout_height="@dimen/_100sdp"
+                android:layout_width="@dimen/_200sdp"
+                android:layout_height="@dimen/_200sdp"
                 android:contentDescription="@string/profile_picture"
                 android:scaleType="centerCrop"
                 android:src="@drawable/rectangle_2"
-                app:riv_oval="true" />
+                app:riv_oval="true"
+                />
 
             <TextView
                 android:id="@+id/add_image_text"
@@ -53,8 +49,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="@string/add_image"
-                android:textColor="#67000000"
-                android:textSize="@dimen/_15sdp" />
+                android:textColor="@color/white"
+                android:textSize="@dimen/_14ssp" />
         </FrameLayout>
 
         <EditText
@@ -63,17 +59,38 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
-            android:background="@drawable/rectangle_2"
-            android:hint="@string/enter_name"
-            android:textColorHint="#67000000"
+            android:background="@drawable/box"
             android:gravity="center"
+            android:hint="@string/name"
             android:importantForAutofill="no"
             android:inputType="text"
-            android:padding="@dimen/_5sdp"
-            android:textSize="@dimen/_20sdp"
-            tools:ignore="LabelFor"
-            android:textColor="@color/black"
-            />
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_18sdp"
+            tools:ignore="LabelFor" />
+
+        <EditText
+            android:id="@+id/edit_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:background="@drawable/box"
+            android:gravity="center"
+            android:hint="@string/status"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:minHeight="48dp"
+            android:paddingStart="@dimen/_8sdp"
+            android:paddingTop="@dimen/_4sdp"
+            android:paddingBottom="@dimen/_4sdp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textSize="@dimen/_18sdp"
+            tools:ignore="LabelFor" />
 
         <FrameLayout
             android:layout_width="match_parent"

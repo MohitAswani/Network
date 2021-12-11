@@ -1,14 +1,16 @@
 package com.example.network.splashscreen
 
+import android.animation.ObjectAnimator
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.example.network.MainActivity
-import com.example.network.R
+import com.example.network.databinding.ActivitySplashScreenBinding
 import com.example.network.phoneAuth.phonelogin
 import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
@@ -23,19 +25,30 @@ class SplashScreen : AppCompatActivity()
 
     private lateinit var preferenceManager: PreferenceManager
 
+    private lateinit var binding:ActivitySplashScreenBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_splash_screen)
+
+        binding= ActivitySplashScreenBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
         mAuth= FirebaseAuth.getInstance()
         val currentUser = mAuth.currentUser
 
-        supportActionBar?.hide()
 
         preferenceManager= PreferenceManager(applicationContext)
 
         Handler(Looper.getMainLooper()).postDelayed({
             updateUI(currentUser)
-        },2000)
+        },750)
+
+        val animator1=ObjectAnimator.ofFloat(binding.networkSymbol, View.TRANSLATION_Y,-420f)
+        animator1.duration=500
+        val animator2=ObjectAnimator.ofFloat(binding.networkName, View.TRANSLATION_Y,-550f)
+        animator2.duration=500
+        animator1.start()
+        animator2.start()
     }
 
     private fun updateUI(user: FirebaseUser? = mAuth.currentUser) {

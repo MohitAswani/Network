@@ -13,6 +13,9 @@
         android:theme="@style/Theme.Network"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ImageViewer"
+            android:exported="false" />
+        <activity
             android:name=".BasicActivity"
             android:exported="false" />
         <activity

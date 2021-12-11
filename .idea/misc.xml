@@ -3,43 +3,68 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/app_icon.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/attach.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/back.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/background_content.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/background_content_bottom.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/background_recived_message.xml" value="0.12777777777777777" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/background_sent_message.xml" value="0.10555555555555556" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/box.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/chat.xml" value="0.23640350877192984" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/circle.xml" value="0.15925925925925927" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/curved_rectangle.xml" value="0.23640350877192984" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/file_adder.xml" value="0.12631578947368421" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/help.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_attach.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_back.xml" value="0.25833333333333336" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_baseline_menu.xml" value="0.14947916666666666" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_baseline_message.xml" value="0.1484375" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_info.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_insert_photo.xml" value="0.23640350877192984" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_add.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_download_2.xml" value="0.12631578947368421" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_emoji_emotions.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_file.xml" value="0.23640350877192984" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/image_attach.xml" value="0.12631578947368421" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/image_sent.xml" value="0.23640350877192984" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/message_input.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/message_typer.xml" value="0.1" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/new_chat.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/options.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/profile_pic_icon.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/rectangle.xml" value="0.15925925925925927" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/rectangle_2.xml" value="0.28072916666666664" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/rectangle_2.xml" value="0.15709090364314326" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/send.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/splash_screen.xml" value="0.15709090364314326" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/toolbar.xml" value="0.2879999900124293" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/upload.xml" value="0.23640350877192984" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_basic.xml" value="0.2604166666666667" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_chat.xml" value="0.21818181061547676" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_chat.xml" value="0.2879999900124293" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_chk_otp.xml" value="0.12613521695257315" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_front.xml" value="0.2604166666666667" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_image_viewer.xml" value="0.21929824561403508" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_login.xml" value="0.2879999900124293" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_main.xml" value="0.21818181061547676" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_main.xml" value="0.122181813944667" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_new_user.xml" value="0.1745454484923814" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_phone_login.xml" value="0.21818181061547676" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_phonelogin.xml" value="0.2604166666666667" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_sign_up_phone.xml" value="0.21818181061547676" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_phonelogin.xml" value="0.21818181061547676" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_sign_up_phone.xml" value="0.19199999334161955" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_signup.xml" value="0.12613521695257315" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_splash_screen.xml" value="0.11979166666666667" />
-        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_user.xml" value="0.19199999334161955" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_splash_screen.xml" value="0.18327272091700048" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/activity_user.xml" value="0.15709090364314326" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/chat_fragment.xml" value="0.1296875" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/fragment_front.xml" value="0.2604166666666667" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_receive_file.xml" value="0.21929824561403508" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_recent.xml" value="0.2604166666666667" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_recieve_file.xml" value="0.2879999900124293" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_recieve_gif_sticker.xml" value="0.21929824561403508" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_recieve_image.xml" value="0.2879999900124293" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_recieve_message.xml" value="0.1745454484923814" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_sent.xml" value="0.1" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_sent_file.xml" value="0.4363636212309535" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_sent_gif_sticker.xml" value="0.21929824561403508" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_sent_image.xml" value="0.2879999900124293" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_sent_message.xml" value="0.19199999334161955" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/item_container_user.xml" value="0.19199999334161955" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/recent_fragment.xml" value="0.1745454484923814" />

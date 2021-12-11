@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_4sdp"
+    android:background="?selectableItemBackground"
+    android:padding="@dimen/_4sdp"
+    tools:background="@color/backgroud_color">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/image_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:contentPadding="@dimen/_4sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_max="@dimen/_250sdp"
+        app:layout_constraintHeight_max="@dimen/_300sdp"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:textColor="@color/black"
+                tools:src="@drawable/netw"
+                app:riv_corner_radius="@dimen/_8sdp"
+                />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/data_time_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_4sdp"
+        android:textColor="@color/light_grey"
+        android:textSize="@dimen/_8ssp"
+        app:layout_constraintStart_toStartOf="@id/image_message"
+        app:layout_constraintTop_toBottomOf="@id/image_message"
+        tools:text="XX:XX   XX/XX/XXXX" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

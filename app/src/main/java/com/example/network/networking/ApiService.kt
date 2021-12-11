@@ -11,6 +11,6 @@ interface ApiService {
     @POST("send")
     fun sendMessage(
         @HeaderMap headers:HashMap<String,String>,
-        @Body message:Body
+        @Body message: String
     ) : Call<String>
 }

@@ -12,6 +12,9 @@
     <color name="light_blue">#03A9F4</color>
     <color name="dark_blue">#0B4AEA</color>
     <color name="splash_screen_color">#1E233E</color>
-    <color name="backgroud_color">#1E233E</color>
-    <color name="backgroud_color_light">#4D5A81</color>
+    <color name="backgroud_color">#1A2346</color>
+    <color name="backgroud_color_light">#9A1A2346</color>
+    <color name="image_attach_color">#00C853</color>
+    <color name="camera_attach_color">#D50000</color>
+    <color name="pdf_attach_color">#FFD600</color>
 </resources>

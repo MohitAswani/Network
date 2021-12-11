@@ -4,7 +4,8 @@
     <string name="password">PASSWORD</string>
     <string name="log_in">LOG IN</string>
     <string name="sign_up">SIGN UP</string>
-    <string name="name">NAME</string>
+    <string name="name">Name</string>
+    <string name="status">Status</string>
     <string name="log_out">LOG OUT</string>
     <string name="username">USERNAME</string>
     <string name="symbol">Symbol</string>
@@ -20,7 +21,7 @@
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string name="create_new_account">Create new account</string>
     <string name="profile_picture">profile_picture</string>
-    <string name="add_image">Add Image</string>
+    <string name="add_image">Image</string>
     <string name="sign_in">Sign in</string>
     <string name="checkmark">checkMark</string>
     <string name="otp_text_1">Please enter the 6-digit OTP send to</string>
@@ -35,4 +36,7 @@
     <string name="add_user">ADD USER</string>
     <string name="no_user_error">NO USER AVAILABLE</string>
     <string name="message">Message</string>
+    <string name="gallery">Gallery</string>
+    <string name="document">Document</string>
+    <string name="camera">Camera</string>
 </resources>
