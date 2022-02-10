@@ -108,7 +108,7 @@ class SignUp : AppCompatActivity() {
             if (result.resultCode == RESULT_OK) {
                 val imageUri: Uri = result.data?.data!!
                 try {
-                    val inputStream = contentResolver.openInputStream(imageUri)
+                    val inputStream = this.contentResolver.openInputStream(imageUri)
                     val bitmap: Bitmap = BitmapFactory.decodeStream(inputStream)
                     binding.userImage.setImageBitmap(bitmap)
                     binding.addImageText.visibility = View.GONE

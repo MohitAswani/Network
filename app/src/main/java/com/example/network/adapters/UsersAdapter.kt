@@ -22,6 +22,7 @@ class UsersAdapter(val users: List<Users>,val userListener: UserListener):Recycl
         return UserViewHolder(itemContainerUserBinding)
     }
 
+
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {
         holder.setUserData(users[position])
     }

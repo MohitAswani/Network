@@ -14,11 +14,17 @@ import com.example.network.ChatActivity
 import com.example.network.R
 import com.example.network.models.Users
 import com.example.network.utilities.Constants
+import com.example.network.utilities.PreferenceManager
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
+import com.scottyab.aescrypt.AESCrypt
 import java.util.*
 
 class MessagingService : FirebaseMessagingService() {
+
+    private lateinit var preferenceManager: PreferenceManager
+
+
     override fun onNewToken(token: String) {
         super.onNewToken(token)
     }
@@ -49,7 +55,7 @@ class MessagingService : FirebaseMessagingService() {
         builder.setContentText(remoteMessage.data[Constants.KEY_MESSAGE])
         builder.setStyle(NotificationCompat.BigTextStyle()
             .bigText(remoteMessage.data[Constants.KEY_MESSAGE]))
-        builder.setPriority(NotificationCompat.PRIORITY_DEFAULT)
+        builder.priority = NotificationCompat.PRIORITY_DEFAULT
         builder.setContentIntent(pendingIntent)
         builder.setAutoCancel(true)
 

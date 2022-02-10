@@ -8,6 +8,6 @@ data class ChatMessage(
     var message:String?,
     val dateTime:String,
     val dateObject:Date,
-    val file:String?,
+    var file:String,
     val fileType:String
 )

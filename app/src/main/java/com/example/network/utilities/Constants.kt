@@ -52,5 +52,20 @@ class Constants {
             return remoteMessageHeaders as HashMap<String, String>
         }
 
+        const val KEY_ENCRYPT_KEY="key"
+
+        private var encryptionKeys=HashMap<String,String>()
+
+        public fun getKey(user:String):String?{
+            return if(encryptionKeys[user] ==null) {
+                null
+            } else {
+                encryptionKeys[user]
+            }
+        }
+        public fun addKey(user:String,key:String){
+            encryptionKeys[user] = key
+        }
+
     }
 }

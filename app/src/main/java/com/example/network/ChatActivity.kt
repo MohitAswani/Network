@@ -41,6 +41,7 @@ import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
 import com.google.firebase.storage.ktx.storage
+import com.scottyab.aescrypt.AESCrypt
 import com.vanniktech.emoji.EmojiPopup
 import kotlinx.android.synthetic.main.activity_chat.*
 import kotlinx.android.synthetic.main.item_container_sent_file.*
@@ -179,14 +180,28 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         }
     }
 
+    private fun getRandomString(length: Int) : String {
+        val allowedChars = ('A'..'Z') + ('a'..'z') + ('0'..'9')
+        return (1..length)
+            .map { allowedChars.random() }
+            .joinToString("")
+    }
+
     private fun sendMessage() {
+
+        if(preferenceManager.getString(rUser.id)=="null")
+            preferenceManager.putString(rUser.id,getRandomString(20))
+
+        Log.d("ChatActivity",preferenceManager.getString(rUser.id))
+
         val message = HashMap<String, Any>()
         Log.i("YOLO", "id not found")
         message[Constants.KEY_SENDER_ID] = preferenceManager.getString(Constants.KEY_USER_ID)
         message[Constants.KEY_RECEIVER_ID] = rUser.id
-        message[Constants.KEY_MESSAGE] = binding.inputText.text.toString().trim()
+        message[Constants.KEY_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),binding.inputText.text.toString().trim())
         message[Constants.KEY_TIMESTAMP] = Date()
         message[Constants.KEY_FILE_TYPE] = Constants.KEY_TEXT_TYPE
+        message[Constants.KEY_FILE]= "not present"
         Log.d("YOLO", "id found")
 
         database.collection(
@@ -194,7 +209,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         ).add(message)
 
         if (conversationId != null) {
-            updateConversation(binding.inputText.text.toString())
+            updateConversation(AESCrypt.encrypt(preferenceManager.getString(rUser.id),binding.inputText.text.toString().trim()))
         } else {
             val conversation = HashMap<String, Any?>()
             conversation[Constants.KEY_SENDER_ID] =
@@ -206,8 +221,9 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
             conversation[Constants.KEY_RECEIVER_ID] = rUser.id
             conversation[Constants.KEY_RECEIVER_NAME] = rUser.name
             conversation[Constants.KEY_RECEIVER_IMAGE] = rUser.image
-            conversation[Constants.KEY_RECENT_MESSAGE] = binding.inputText.text.toString().trim()
+            conversation[Constants.KEY_RECENT_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),binding.inputText.text.toString().trim())
             conversation[Constants.KEY_TIMESTAMP] = Date()
+            conversation[Constants.KEY_ENCRYPT_KEY]=preferenceManager.getString(rUser.id)
             addConversation(conversation)
         }
         if (!isReceiverAvailable) {
@@ -219,7 +235,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
                 data.put(Constants.KEY_USER_ID, preferenceManager.getString(Constants.KEY_USER_ID))
                 data.put(Constants.KEY_NAME, preferenceManager.getString(Constants.KEY_NAME))
                 data.put(Constants.FCM_TOKEN, preferenceManager.getString(Constants.FCM_TOKEN))
-                data.put(Constants.KEY_MESSAGE, binding.inputText.text.toString())
+                data.put(Constants.KEY_MESSAGE, AESCrypt.encrypt(preferenceManager.getString(rUser.id),binding.inputText.text.toString().trim()))
 
                 val body = JSONObject()
                 body.put(Constants.REMOTE_MESSAGE_DATA, data)
@@ -285,11 +301,11 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
                                 val message = ChatMessage(
                                     senderId = dc.document.getString(Constants.KEY_SENDER_ID)!!,
                                     receiverId = dc.document.getString(Constants.KEY_RECEIVER_ID)!!,
-                                    message = dc.document.getString(Constants.KEY_MESSAGE)?.trim(),
+                                    message = AESCrypt.decrypt(preferenceManager.getString(rUser.id),dc.document.getString(Constants.KEY_MESSAGE)),
                                     dateTime = getReadableDateChat(dc.document.getDate(Constants.KEY_TIMESTAMP)!!),
                                     dateObject = dc.document.getDate(Constants.KEY_TIMESTAMP)!!,
                                     fileType = dc.document.getString(Constants.KEY_FILE_TYPE) ?: "text",
-                                    file = dc.document.getString(Constants.KEY_FILE)
+                                    file = dc.document.getString(Constants.KEY_FILE)?:"null"
                                 )
                                 message.message=message.message?.trim()
                                 chatMessages.add(message)
@@ -331,11 +347,11 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
                                 val message = ChatMessage(
                                     senderId = dc.document.getString(Constants.KEY_SENDER_ID)!!,
                                     receiverId = dc.document.getString(Constants.KEY_RECEIVER_ID)!!,
-                                    message = dc.document.getString(Constants.KEY_MESSAGE)?.trim(),
+                                    message = AESCrypt.decrypt(preferenceManager.getString(rUser.id),dc.document.getString(Constants.KEY_MESSAGE)),
                                     dateTime = getReadableDateChat(dc.document.getDate(Constants.KEY_TIMESTAMP)!!),
                                     dateObject = dc.document.getDate(Constants.KEY_TIMESTAMP)!!,
                                     fileType = dc.document.getString(Constants.KEY_FILE_TYPE) ?: "text",
-                                    file = dc.document.getString(Constants.KEY_FILE)
+                                    file = dc.document.getString(Constants.KEY_FILE)?:"null"
                                 )
                                 message.message=message.message?.trim()
                                 chatMessages.add(message)
@@ -365,6 +381,14 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
             .addOnSuccessListener {
                 conversationId = it.id
             }
+
+        val data=HashMap<String,Any>()
+        data["user1"]=preferenceManager.getString(Constants.KEY_USER_ID)
+        data["user2"]=rUser.id
+        data["key"]=conversation[Constants.KEY_ENCRYPT_KEY].toString()
+
+        database.collection("keys")
+            .add(data)
 
     }
 
@@ -524,7 +548,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         Log.i("YOLO", "id not found")
         message[Constants.KEY_SENDER_ID] = preferenceManager.getString(Constants.KEY_USER_ID)
         message[Constants.KEY_RECEIVER_ID] = rUser.id
-        message[Constants.KEY_MESSAGE] = binding.inputText.text.toString().trim()
+        message[Constants.KEY_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),binding.inputText.text.toString().trim())
         message[Constants.KEY_TIMESTAMP] = Date()
         message[Constants.KEY_FILE_TYPE] = Constants.KEY_IMAGE_TYPE
         message[Constants.KEY_FILE]=image
@@ -535,7 +559,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         ).add(message)
 
         if (conversationId != null) {
-            updateConversation(" \uD83D\uDCF7 IMAGE")
+            updateConversation(AESCrypt.encrypt(preferenceManager.getString(rUser.id)," \uD83D\uDCF7 IMAGE"))
         } else {
             val conversation = HashMap<String, Any?>()
             conversation[Constants.KEY_SENDER_ID] =
@@ -547,7 +571,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
             conversation[Constants.KEY_RECEIVER_ID] = rUser.id
             conversation[Constants.KEY_RECEIVER_NAME] = rUser.name
             conversation[Constants.KEY_RECEIVER_IMAGE] = rUser.image
-            conversation[Constants.KEY_RECENT_MESSAGE] = " \uD83D\uDCF7 IMAGE"
+            conversation[Constants.KEY_RECENT_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id)," \uD83D\uDCF7 IMAGE")
             conversation[Constants.KEY_TIMESTAMP] = Date()
             addConversation(conversation)
         }
@@ -636,7 +660,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         Log.i("YOLO", "id not found")
         message[Constants.KEY_SENDER_ID] = preferenceManager.getString(Constants.KEY_USER_ID)
         message[Constants.KEY_RECEIVER_ID] = rUser.id
-        message[Constants.KEY_MESSAGE] = fileName
+        message[Constants.KEY_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),fileName)
         message[Constants.KEY_TIMESTAMP] = Date()
         message[Constants.KEY_FILE_TYPE] = Constants.KEY_FILE_TYPE
         message[Constants.KEY_FILE]=fileReference
@@ -647,7 +671,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         ).add(message)
 
         if (conversationId != null) {
-            updateConversation("📄 Document")
+            updateConversation(AESCrypt.encrypt(preferenceManager.getString(rUser.id),"📄 Document"))
         } else {
             val conversation = HashMap<String, Any?>()
             conversation[Constants.KEY_SENDER_ID] =
@@ -659,7 +683,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
             conversation[Constants.KEY_RECEIVER_ID] = rUser.id
             conversation[Constants.KEY_RECEIVER_NAME] = rUser.name
             conversation[Constants.KEY_RECEIVER_IMAGE] = rUser.image
-            conversation[Constants.KEY_RECENT_MESSAGE] = "📄 Document"
+            conversation[Constants.KEY_RECENT_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),"📄 Document")
             conversation[Constants.KEY_TIMESTAMP] = Date()
             addConversation(conversation)
         }
@@ -722,6 +746,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         Log.i("YOLO", "id not found")
         message[Constants.KEY_SENDER_ID] = preferenceManager.getString(Constants.KEY_USER_ID)
         message[Constants.KEY_RECEIVER_ID] = rUser.id
+        message[Constants.KEY_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),"null")
         message[Constants.KEY_TIMESTAMP] = Date()
         message[Constants.KEY_FILE_TYPE] = Constants.KEY_GIFS_STICKERS_TYPE
         message[Constants.KEY_FILE]=fileReference
@@ -732,7 +757,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
         ).add(message)
 
         if (conversationId != null) {
-            updateConversation("\uD83D\uDC7E Sticker")
+            updateConversation(AESCrypt.encrypt(preferenceManager.getString(rUser.id),"\uD83D\uDC7E Sticker"))
         } else {
             val conversation = HashMap<String, Any?>()
             conversation[Constants.KEY_SENDER_ID] =
@@ -744,7 +769,7 @@ class ChatActivity : BasicActivity(), ImageListener ,FileListener {
             conversation[Constants.KEY_RECEIVER_ID] = rUser.id
             conversation[Constants.KEY_RECEIVER_NAME] = rUser.name
             conversation[Constants.KEY_RECEIVER_IMAGE] = rUser.image
-            conversation[Constants.KEY_RECENT_MESSAGE] = "\uD83D\uDC7E Sticker"
+            conversation[Constants.KEY_RECENT_MESSAGE] = AESCrypt.encrypt(preferenceManager.getString(rUser.id),"\uD83D\uDC7E Sticker")
             conversation[Constants.KEY_TIMESTAMP] = Date()
             addConversation(conversation)
         }

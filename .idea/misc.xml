@@ -26,6 +26,7 @@
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_download_2.xml" value="0.12631578947368421" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_emoji_emotions.xml" value="0.28072916666666664" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_file.xml" value="0.23640350877192984" />
+        <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/ic_round_keyboard_24.xml" value="0.1" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/image_attach.xml" value="0.12631578947368421" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/image_sent.xml" value="0.23640350877192984" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/drawable/message_input.xml" value="0.28072916666666664" />
@@ -70,6 +71,17 @@
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/recent_fragment.xml" value="0.1745454484923814" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/layout/status_fragment.xml" value="0.1296875" />
         <entry key="..\:/CODING/Android_Dev/APPS/Network/app/src/main/res/menu/main_activity_menu.xml" value="0.2553626149131767" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_chat.xml" value="0.1067463706233988" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_chk_otp.xml" value="0.2128623188405797" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_login.xml" value="0.2128623188405797" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_main.xml" value="0.1067463706233988" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_phonelogin.xml" value="0.2128623188405797" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_sign_up_phone.xml" value="0.2128623188405797" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_signup.xml" value="0.21929824561403508" />
+        <entry key="..\:/CODING/Android_Dev/Kotlin/Practice/2_Network/app/src/main/res/layout/activity_user.xml" value="0.1" />
+        <entry key="..\:/CODING/Android_Dev/Practice/2_Network/app/src/main/res/layout/activity_user.xml" value="0.21929824561403508" />
+        <entry key="..\:/CODING/Android_Dev/Practice/2_Network/app/src/main/res/layout/item_container_recieve_gif_sticker.xml" value="0.18568840579710144" />
+        <entry key="..\:/CODING/Android_Dev/Practice/2_Network/app/src/main/res/layout/item_container_user.xml" value="0.1" />
         <entry key="app/src/main/res/drawable-anydpi/ic_lock.xml" value="0.3037037037037037" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.375" />
         <entry key="app/src/main/res/layout/activity_signup.xml" value="0.375" />

@@ -189,6 +189,8 @@
 
             <com.example.network.components.MyEditText
                 android:id="@+id/inputText"
+                android:linksClickable="true"
+                android:autoLink="web|map|email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"

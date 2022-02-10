@@ -171,7 +171,7 @@ class ChatAdapter(
     inner class ReceiveImageViewHolder(val binding: ItemContainerRecieveImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(chatMessage: ChatMessage) {
-            binding.image.setImageBitmap(getUserImage(chatMessage.file!!))
+            binding.image.setImageBitmap(getUserImage(chatMessage.file))
             binding.dataTimeText.text = chatMessage.dateTime
             binding.image.setOnClickListener {
                 imageListener.onImageClicked(chatMessage.file)
@@ -182,7 +182,7 @@ class ChatAdapter(
     inner class SentImageViewHolder(val binding: ItemContainerSentImageBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun setData(chatMessage: ChatMessage) {
-            binding.image.setImageBitmap(getUserImage(chatMessage.file!!))
+            binding.image.setImageBitmap(getUserImage(chatMessage.file))
             binding.dataTimeText.text = chatMessage.dateTime
             binding.image.setOnClickListener {
                 imageListener.onImageClicked(chatMessage.file)
@@ -196,7 +196,7 @@ class ChatAdapter(
             binding.fileName.text = chatMessage.message
             binding.dataTimeText.text = chatMessage.dateTime
             binding.download.setOnClickListener {
-                fileListener.onFileClicked(chatMessage.file!!, chatMessage.message!!)
+                fileListener.onFileClicked(chatMessage.file, chatMessage.message!!)
             }
         }
     }
@@ -207,7 +207,7 @@ class ChatAdapter(
             binding.fileName.text = chatMessage.message
             binding.dataTimeText.text = chatMessage.dateTime
             binding.download.setOnClickListener {
-                fileListener.onFileClicked(chatMessage.file!!, chatMessage.message!!)
+                fileListener.onFileClicked(chatMessage.file, chatMessage.message!!)
             }
         }
     }
@@ -228,7 +228,7 @@ class ChatAdapter(
         RecyclerView.ViewHolder(binding.root) {
         fun setData(chatMessage: ChatMessage) {
             Glide.with(binding.root.context)
-                .load(chatMessage.file?.toUri())
+                .load(chatMessage.file.toUri())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)
                 .into(binding.image)
             binding.dataTimeText.text = chatMessage.dateTime

@@ -4,19 +4,24 @@ import android.content.Intent
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.widget.PopupMenu
 import android.widget.Toast
 import com.example.network.adapters.ViewPagerFragmentAdapter
 import com.example.network.databinding.ActivityMainBinding
+import com.example.network.models.Conversation
+import com.example.network.phoneAuth.ChkOTP
 import com.example.network.phoneAuth.phonelogin
 import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.DocumentChange
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.messaging.FirebaseMessaging
+import com.scottyab.aescrypt.AESCrypt
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -31,7 +36,7 @@ class MainActivity : BasicActivity() {
 
     private lateinit var viewPagerFragmentAdapter: ViewPagerFragmentAdapter
 
-    private val titles= arrayOf(R.string.tab_chat,R.string.tab_status)
+    private val titles = arrayOf(R.string.tab_chat, R.string.tab_status)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,19 +67,75 @@ class MainActivity : BasicActivity() {
 
         }
 
-        viewPagerFragmentAdapter= ViewPagerFragmentAdapter(this)
-        binding.viewPager.adapter=viewPagerFragmentAdapter
-        TabLayoutMediator(binding.tabs,binding.viewPager) { tab: TabLayout.Tab, i: Int ->
+        viewPagerFragmentAdapter = ViewPagerFragmentAdapter(this)
+        binding.viewPager.adapter = viewPagerFragmentAdapter
+        TabLayoutMediator(binding.tabs, binding.viewPager) { tab: TabLayout.Tab, i: Int ->
             tab.setText(
                 titles[i]
             )
         }.attach()
 
+        setKeys()
+
     }
 
-    private fun setListeners(){
-        binding.fabNewChat.setOnClickListener{
-            startActivity(Intent(this@MainActivity,UserActivity::class.java))
+    private fun setKeys() {
+        val database = FirebaseFirestore.getInstance()
+
+        database.collection("keys").whereEqualTo(
+            "user1",
+            preferenceManager.getString(Constants.KEY_USER_ID)
+        ).addSnapshotListener { snapshots, e ->
+            if (e != null) {
+                Log.w(ChkOTP.TAG, "Listen:error", e)
+                return@addSnapshotListener
+            }
+            if (snapshots != null) {
+                for (dc in snapshots.documentChanges) {
+                    if (dc.type == DocumentChange.Type.ADDED) {
+                        preferenceManager.putString(
+                            dc.document.getString("user2")!!,
+                            dc.document.getString("key")!!
+                        )
+                    } else if (dc.type == DocumentChange.Type.MODIFIED) {
+                        preferenceManager.putString(
+                            dc.document.getString("user2")!!,
+                            dc.document.getString("key")!!
+                        )
+                    }
+                }
+            }
+        }
+
+        database.collection("keys").whereEqualTo(
+            "user2",
+            preferenceManager.getString(Constants.KEY_USER_ID)
+        ).addSnapshotListener { snapshots, e ->
+            if (e != null) {
+                Log.w(ChkOTP.TAG, "Listen:error", e)
+                return@addSnapshotListener
+            }
+            if (snapshots != null) {
+                for (dc in snapshots.documentChanges) {
+                    if (dc.type == DocumentChange.Type.ADDED) {
+                        preferenceManager.putString(
+                            dc.document.getString("user1")!!,
+                            dc.document.getString("key")!!
+                        )
+                    } else if (dc.type == DocumentChange.Type.MODIFIED) {
+                        preferenceManager.putString(
+                            dc.document.getString("user1")!!,
+                            dc.document.getString("key")!!
+                        )
+                    }
+                }
+            }
+        }
+    }
+
+    private fun setListeners() {
+        binding.fabNewChat.setOnClickListener {
+            startActivity(Intent(this@MainActivity, UserActivity::class.java))
         }
     }
 
@@ -94,7 +155,7 @@ class MainActivity : BasicActivity() {
     }
 
     private fun updateToken(token: String) {
-        preferenceManager.putString(Constants.FCM_TOKEN,token)
+        preferenceManager.putString(Constants.FCM_TOKEN, token)
         val database = FirebaseFirestore.getInstance()
 
         val documentReference = database.collection(Constants.KEY_COLLECTIONS_USER)

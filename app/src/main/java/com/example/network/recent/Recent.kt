@@ -20,7 +20,9 @@ import com.example.network.phoneAuth.ChkOTP
 import com.example.network.utilities.Constants
 import com.example.network.utilities.PreferenceManager
 import com.google.firebase.firestore.DocumentChange
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.scottyab.aescrypt.AESCrypt
 import java.util.*
 
 class Recent : Fragment(), ConversationListener {
@@ -95,7 +97,8 @@ class Recent : Fragment(), ConversationListener {
                                 conversationName =
                                     dc.document.getString(Constants.KEY_SENDER_NAME)!!
                             }
-                            val conversationMessage: String=dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                            val conversationMessage: String=
+                                AESCrypt.decrypt(preferenceManager.getString(receiverId),dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!)
                             val dateObject: Date =
                                 dc.document.getDate(Constants.KEY_TIMESTAMP)!!
                             val conversation = Conversation(
@@ -115,7 +118,7 @@ class Recent : Fragment(), ConversationListener {
                                     dc.document.getString(Constants.KEY_RECEIVER_ID)
                                 if (recentMessages[i].senderId == senderId && recentMessages[i].receiverId == receiverId) {
                                         recentMessages[i].last_message =
-                                                dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                                            AESCrypt.decrypt(preferenceManager.getString(receiverId),dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!)
                                     recentMessages[i].dateObject =
                                         dc.document.getDate(Constants.KEY_TIMESTAMP)!!
                                     break;
@@ -166,9 +169,17 @@ class Recent : Fragment(), ConversationListener {
                                     dc.document.getString(Constants.KEY_SENDER_IMAGE)!!
                                 conversationName =
                                     dc.document.getString(Constants.KEY_SENDER_NAME)!!
+
+                                if(preferenceManager.getString(senderId)=="null")
+                                    preferenceManager.putString(senderId,dc.document.getString(Constants.KEY_ENCRYPT_KEY)!!)
+
+                                val updates = hashMapOf<String, Any>(
+                                    Constants.KEY_ENCRYPT_KEY to FieldValue.delete()
+                                )
+                                database.collection(Constants.KEY_COLLECTION_CONVERSATION).document(dc.document.id).update(updates)
                             }
                             val conversationMessage: String =
-                                dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                                AESCrypt.decrypt(preferenceManager.getString(senderId),dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!)
                             val dateObject: Date =
                                 dc.document.getDate(Constants.KEY_TIMESTAMP)!!
                             val conversation = Conversation(
@@ -188,7 +199,7 @@ class Recent : Fragment(), ConversationListener {
                                 val conversationName: String
                                 if (recentMessages[i].senderId == senderId && recentMessages[i].receiverId == receiverId) {
                                     recentMessages[i].last_message =
-                                        dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!
+                                        AESCrypt.decrypt(preferenceManager.getString(senderId),dc.document.getString(Constants.KEY_RECENT_MESSAGE)!!)
                                     recentMessages[i].dateObject =
                                         dc.document.getDate(Constants.KEY_TIMESTAMP)!!
                                     break;

@@ -7,32 +7,39 @@
     android:layout_marginTop="@dimen/_4sdp"
     android:background="?selectableItemBackground"
     android:padding="@dimen/_4sdp"
-    tools:background="@color/backgroud_color"
-    >
+    tools:background="@color/backgroud_color">
 
 
     <androidx.cardview.widget.CardView
         android:id="@+id/image_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:cardCornerRadius="@dimen/_10sdp"
-        app:contentPadding="@dimen/_4sdp"
         app:cardBackgroundColor="@color/white"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:contentPadding="@dimen/_4sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
-        app:layout_constraintWidth_max="@dimen/_150sdp"
-        app:layout_constraintHeight_max="@dimen/_200sdp"
+        app:layout_constraintWidth_max="@dimen/_125sdp"
+        app:layout_constraintHeight_max="@dimen/_175sdp"
         >
 
-        <com.comix.rounded.RoundedCornerImageView
-            android:id="@+id/image"
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:src="@drawable/netw"
-            android:scaleType="centerCrop"
-            app:cornerRadius="@dimen/_4sdp"
-            />
+            android:orientation="vertical"
+            >
+
+            <com.rishabhharit.roundedimageview.RoundedImageView
+                android:id="@+id/image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerCrop"
+                android:textColor="@color/black"
+                tools:src="@drawable/netw"
+                app:cornerRadius="@dimen/_8sdp"
+                />
+
+        </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
@@ -43,7 +50,7 @@
         android:layout_margin="@dimen/_4sdp"
         android:textColor="@color/light_grey"
         android:textSize="@dimen/_8ssp"
-        app:layout_constraintEnd_toEndOf="@id/image_message"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/image_message"
         tools:text="XX:XX   XX/XX/XXXX" />
 
